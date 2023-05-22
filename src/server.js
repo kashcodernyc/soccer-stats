@@ -1,7 +1,7 @@
 const express = require("express");
+require("dotenv").config();
 const axios = require("axios");
 const cors = require("cors");
-require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -9,7 +9,9 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+const competitonList = "PL,PD,BL1,SA,FL1,DED,PPL,CL,EC,WC";
 const apiKey = process.env.SOCCER_API_KEY;
+console.log(apiKey);
 
 app.get("/api/live-matches", async (req, res) => {
   try {
@@ -21,7 +23,7 @@ app.get("/api/live-matches", async (req, res) => {
         },
         params: {
           status: "LIVE",
-          competitions: "PL,PD,BL1,SA",
+          competitions: competitonList,
         },
       }
     );
@@ -46,7 +48,7 @@ app.get("/api/todays-matches", async (req, res) => {
         params: {
           dateFrom: today,
           dateTo: today,
-          competitions: "PL,PD,BL1,SA",
+          competitions: competitonList,
         },
       }
     );

@@ -1,39 +1,103 @@
+.container {
+  display: flex;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-color: #ee4e34;
+  margin: 10px;
+  height: 97vh;
+  font-family: sans-serif;
+}
+
 .scoreboard {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 2;
   padding: 20px;
-  border-radius: 8px;
+}
+
+.rhomboid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 40px;
+  border-left: 20px solid #ee4e34;
+  background-color: #fcedda;
+  transform: skew(-20deg);
+  z-index: -1;
+}
+
+.page-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: black;
+  padding: 10px;
+  font-size: 16px;
+  margin: 0 0 0 40px;
+  z-index: 1;
+}
+
+.empty-section {
+  flex: 3;
+  background-color: #fcedda;
 }
 
 .competition-container {
-  margin-bottom: 20px;
-}
-
-.competition-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .match-list {
-  list-style: none;
   padding: 0;
 }
 
 .match-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  list-style-type: none;
+  box-shadow: 0 2px 4px #ee4e34;
+  background-color: #ee4e34;
 }
 
-.team {
+.team-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  background-color: #fcedda;
+}
+
+.competition-title {
+  font-size: 14px;
   font-weight: bold;
+  margin-bottom: 10px;
+  background-color: #ee4e34;
+  color: #fff;
+  padding: 4px;
+}
+
+.team-name {
+  width: 200px;
+  font-size: 10px;
+}
+
+.score-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  box-shadow: 0 4px 6px #ee4e34;
 }
 
 .score {
-  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+.chevron-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
