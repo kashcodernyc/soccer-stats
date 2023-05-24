@@ -11,32 +11,74 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 2;
+  flex: 3;
+  background-color: floralwhite;
   padding: 20px;
+  overflow: scroll;
 }
 
-.rhomboid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 40px;
-  border-left: 20px solid #ee4e34;
-  background-color: #fcedda;
-  transform: skew(-20deg);
-  z-index: -1;
+.navigation-bar {
+  display: flex;
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-right: 4px solid #ee4e34;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.3s ease-in;
+}
+.nav-item:hover {
+  background-color: #ee4e34;
+}
+
+.nav-item:last-child {
+  border-right: none;
 }
 
 .page-title {
-  position: relative;
   display: flex;
+  justify-content:center;
   align-items: center;
-  color: black;
-  padding: 10px;
+  margin-top: 20px;
+  padding: 5px;
   font-size: 16px;
-  margin: 0 0 0 40px;
-  z-index: 1;
+  color: white;
+  background-color: #ee4e34;
 }
+
+h1{
+  margin:0;
+  padding: 0;
+  font-size: 14px;
+}
+
+h2{
+  margin:0;
+  padding: 0;
+  font-size: 12px;
+}
+
+
+.logo-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.league-logo{
+  margin-top: 10px;
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+
 
 .empty-section {
   flex: 3;
@@ -45,6 +87,7 @@
 
 .competition-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -69,10 +112,11 @@
 .competition-title {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 10px;
   background-color: #ee4e34;
   color: #fff;
+  margin-bottom: 5px;
   padding: 4px;
+  box-shadow: 0 4px 6px #ee4e34;
 }
 
 .team-name {
@@ -95,9 +139,10 @@
   font-weight: bold;
   color: black;
 }
-
-.chevron-icon {
+.expand-icon{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  
+  margin-top: 10px;
 }
+

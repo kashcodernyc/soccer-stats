@@ -9,21 +9,27 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-const competitonList = "PL,PD,BL1,SA,FL1,DED,PPL,CL,EC,WC";
-const apiKey = process.env.SOCCER_API_KEY;
-console.log(apiKey);
+const soccerApiKey = process.env.SOCCER_API_KEY;
+const nbaApiKey = process.env.NBA_API_KEY;
+const today = new Date().toISOString().split("T")[0];
+const rightNow = new Date();
+const startDate = new Date(rightNow - 7 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .split("T")[0];
+const endDate = new Date(rightNow + 7 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .split("T")[0];
 
-app.get("/api/live-matches", async (req, res) => {
+app.get("/api/todays-nba-matches", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://api.football-data.org/v2/matches",
+      "https://api-nba-v1.p.rapidapi.com/games",
       {
         headers: {
-          "X-Auth-Token": apiKey,
+          "X-RapidAPI-Key": nbaApiKey,
         },
         params: {
-          status: "LIVE",
-          competitions: competitonList,
+          date: today,
         },
       }
     );
@@ -36,19 +42,23 @@ app.get("/api/live-matches", async (req, res) => {
   }
 });
 
-app.get("/api/todays-matches", async (req, res) => {
+app.get("/api/todays-soccer-matches", async (req, res) => {
   try {
-    const today = new Date().toISOString().split("T")[0];
+    const currentYear = new Date().getFullYear();
+    const currentSeason = currentYear - 1;
+    console.log(req.query.league, currentSeason);
     const response = await axios.get(
-      "https://api.football-data.org/v2/matches",
+      "https://api-football-v1.p.rapidapi.com/v3/fixtures",
       {
         headers: {
-          "X-Auth-Token": apiKey,
+          "X-RapidAPI-Key": soccerApiKey,
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
         },
         params: {
-          dateFrom: today,
-          dateTo: today,
-          competitions: competitonList,
+          league: req.query.league,
+          season: currentSeason,
+          from: startDate,
+          to: endDate,
         },
       }
     );
