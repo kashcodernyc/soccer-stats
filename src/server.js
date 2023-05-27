@@ -42,12 +42,12 @@ app.get("/api/todays-nba-matches", async (req, res) => {
   }
 });
 
-app.get("/api/todays-soccer-matches", async (req, res) => {
+app.get("/api/soccer-data", async (req, res) => {
   try {
     const currentYear = new Date().getFullYear();
     const currentSeason = currentYear - 1;
-    console.log(req.query.league, currentSeason);
-    const response = await axios.get(
+
+    const matchesResponse = await axios.get(
       "https://api-football-v1.p.rapidapi.com/v3/fixtures",
       {
         headers: {
@@ -63,7 +63,25 @@ app.get("/api/todays-soccer-matches", async (req, res) => {
       }
     );
 
-    const data = response.data;
+    const tableResponse = await axios.get(
+      "https://api-football-v1.p.rapidapi.com/v3/standings",
+      {
+        headers: {
+          "X-RapidAPI-Key": soccerApiKey,
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+        },
+        params: {
+          league: req.query.league,
+          season: currentSeason,
+        },
+      }
+    );
+
+    const data = {
+      matches: matchesResponse.data,
+      table: tableResponse.data,
+    };
+
     res.json(data);
   } catch (error) {
     console.error(error);

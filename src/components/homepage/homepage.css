@@ -2,19 +2,19 @@
   display: flex;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-color: #ee4e34;
-  margin: 10px;
-  height: 97vh;
   font-family: sans-serif;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .scoreboard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 3;
+  flex: 2;
   background-color: floralwhite;
-  padding: 20px;
   overflow: scroll;
+  padding: 10px 0 10px 0;
 }
 
 .navigation-bar {
@@ -23,7 +23,7 @@
   margin-bottom: 20px;
 }
 
-.nav-item {
+.navigation-bar .nav-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,57 +33,56 @@
   color: inherit;
   transition: background-color 0.3s ease-in;
 }
-.nav-item:hover {
+
+.navigation-bar .nav-item:hover {
   background-color: #ee4e34;
 }
 
-.nav-item:last-child {
+.navigation-bar .nav-item:last-child {
   border-right: none;
 }
 
 .page-title {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 5px;
   font-size: 16px;
   color: white;
   background-color: #ee4e34;
 }
 
-h1{
-  margin:0;
-  padding: 0;
+h1, h2{
   font-size: 14px;
-}
-
-h2{
-  margin:0;
+  margin: 0;
   padding: 0;
-  font-size: 12px;
 }
-
-
-.logo-container{
+.logo-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  width: 350px;
 }
 
-.league-logo{
+.league-logo {
   margin-top: 10px;
   height: 40px;
   width: 40px;
   object-fit: contain;
 }
 
+.table-league-logo img{
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+}
 
-
-.empty-section {
-  flex: 3;
+.league-table {
+  flex: 2;
   background-color: #fcedda;
 }
+
 
 .competition-container {
   display: flex;
@@ -102,26 +101,50 @@ h2{
 }
 
 .team-container {
+  width: 465px;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 0 10px;
   background-color: #fcedda;
+}
+
+.team-logo {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
 }
 
 .competition-title {
   font-size: 14px;
   font-weight: bold;
-  background-color: #ee4e34;
   color: #fff;
   margin-bottom: 5px;
   padding: 4px;
   box-shadow: 0 4px 6px #ee4e34;
 }
 
-.team-name {
+.page-title img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+.team-name-home {
   width: 200px;
-  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-size: 12px;
+  padding: 0 15px 0 0;
+}
+
+.team-name-away {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 15px;
+  font-size: 12px;
 }
 
 .score-container {
@@ -129,8 +152,8 @@ h2{
   justify-content: center;
   align-items: center;
   font-size: 10px;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background-color: white;
   box-shadow: 0 4px 6px #ee4e34;
 }
@@ -139,10 +162,91 @@ h2{
   font-weight: bold;
   color: black;
 }
-.expand-icon{
+
+
+/* CSS for soccerTable.jsx */
+
+.soccer-standings {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: center;  
-  margin-top: 10px;
+  overflow: scroll;
+  margin-top: 20px;
 }
 
+table {
+  border: 1px solid #ee4e34;
+  border-left: 8px solid #ee4e34;
+  border-right: 8px solid #ee4e34;
+  width: 500px;
+  margin: 10px 0 10px 0;
+}
+
+thead {
+  background-color: #ee4e34;
+  color: #fff;
+}
+
+.table-row {
+  background-color: #fcedda;
+  font-size: 12px;
+}
+
+table tr:nth-child(even) {
+  background-color: #fcdeda;
+}
+
+
+.club-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.club-info .rank,
+.club-info .logo,
+.club-info .name {
+  margin-right: 8px;
+}
+
+td img {
+  height: 20px;
+  width: 20px;
+}
+
+.form-column {
+  display: flex;
+  align-items: center;
+}
+
+
+/* Add media query for container width less than 1075px */
+@media (max-width: 1075px) {
+  .container {
+    flex-direction: column;
+  }
+  .scoreboard {
+    overflow: visible;
+  }
+  
+
+}
+
+@media (max-width: 600px) {
+  table{
+    width: 370px;
+  }
+
+  .team-container {
+  width: 340px;
+  }
+
+  .team-name-home{
+    width: 130px;
+  }
+
+  .team-name-away{
+    width: 130px;
+  }
+}

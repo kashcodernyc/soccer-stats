@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = ({ activeLink, setActiveLink }) => {
 
-    const handleLinkClick = (link) => {
+    const handleLinkClick = (link, event) => {
         setActiveLink(link);
     };
 
