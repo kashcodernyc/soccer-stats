@@ -3,6 +3,6 @@
   publish = "build"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/*"
+  to = "http://localhost:5000/:splat"
   status = 200
