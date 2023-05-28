@@ -9,8 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-const soccerApiKey = process.env.SOCCER_API_KEY;
-const nbaApiKey = process.env.NBA_API_KEY;
+const ApiKey = process.env.API_KEY;
 const today = new Date().toISOString().split("T")[0];
 const rightNow = new Date();
 const startDate = new Date(rightNow - 7 * 24 * 60 * 60 * 1000)
@@ -26,7 +25,7 @@ app.get("/api/todays-nba-matches", async (req, res) => {
       "https://api-nba-v1.p.rapidapi.com/games",
       {
         headers: {
-          "X-RapidAPI-Key": nbaApiKey,
+          "X-RapidAPI-Key": ApiKey,
         },
         params: {
           date: today,
@@ -51,7 +50,7 @@ app.get("/api/soccer-data", async (req, res) => {
       "https://api-football-v1.p.rapidapi.com/v3/fixtures",
       {
         headers: {
-          "X-RapidAPI-Key": soccerApiKey,
+          "X-RapidAPI-Key": ApiKey,
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
         },
         params: {
@@ -67,7 +66,7 @@ app.get("/api/soccer-data", async (req, res) => {
       "https://api-football-v1.p.rapidapi.com/v3/standings",
       {
         headers: {
-          "X-RapidAPI-Key": soccerApiKey,
+          "X-RapidAPI-Key": ApiKey,
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
         },
         params: {
