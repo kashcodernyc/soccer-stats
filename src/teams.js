@@ -4,7 +4,7 @@ import SpanishLeagueLogo from "./assets/logos/Spanish.png";
 import BundesLeagueLogo from "./assets/logos/BL.png";
 import ItalianLeagueLogo from "./assets/logos/Italian.png";
 import EuropaLeagueLogo from "./assets/logos/Europa.png";
-import FrenchLeagueLogo from "./assets/logos/French.png";
+import FrenchLeagueLogo from "./assets/logos/french.png";
 
 export const LeagueList = [
   { id: 39, logo: PremierLeagueLogo, alt: "Premier League" },
