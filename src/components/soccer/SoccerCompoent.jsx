@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import { LeagueList } from '../../teams';
+import { GET_SOCCER_DATA } from './soccerQueries';
+
 
 const SoccerComponent = ({
     activeLeague,
@@ -11,72 +14,29 @@ const SoccerComponent = ({
     setLeagueData
 }) => {
 
+    const [getSoccerData, { loading, data }] = useLazyQuery(GET_SOCCER_DATA);
+
     const handleLeagueClick = (leagueId) => {
         setActiveLeague(leagueId);
     };
 
+
     useEffect(() => {
-        // Create an AbortController instance
-        const controller = new AbortController();
-        // Get the signal from the controller
-        const signal = controller.signal;
-        const fetchDataWithCancellation = async () => {
-            try {
-                const response = await fetch(`http://localhost:5000/api/soccer-data?league=${activeLeague}`, {
-                    signal: signal // Pass the signal to the fetch request
-                });
-                const data = await response.json();
-                console.log(data);
+        if (data) {
+            const { matches, table, leagueInfo } = data.soccerData;
+            setLeague(matches);
+            setTableData(table);
+            setLeagueData(leagueInfo);
+        }
+    }, [data, setLeague, setTableData, setLeagueData]);
 
-                const matchResults = data?.matches.response.map((match) => ({
-                    homeTeam: match.teams.home.name,
-                    awayTeam: match.teams.away.name,
-                    homeLogo: match.teams.home.logo,
-                    awayLogo: match.teams.away.logo,
-                    league: match.league.name,
-                    leagueFlag: match.league.flag,
-                    score: typeof match.goals.home !== 'number' ? 'TBA' : `${match.goals.home} - ${match.goals.away}`,
-                    date: match.fixture.date,
-                    id: match.fixture.id,
-                }));
-
-                const tableResults = data?.table.response[0].league.standings[0].map((row) => ({
-                    rank: row.rank,
-                    points: row.points,
-                    name: row.team.name,
-                    logo: row.team.logo,
-                    played: row.all.played,
-                    win: row.all.win,
-                    lose: row.all.lose,
-                    draw: row.all.draw,
-                    goalsFor: row.all.goals.for,
-                    goalsAgainst: row.all.goals.against,
-                    form: row.form,
-                }));
-
-                const leagueInfo = {
-                    leagueName: data?.table.response[0].league.name,
-                    leagueFlag: data?.table.response[0].league.flag,
-                    leagueLogo: data?.table.response[0].league.logo,
-                };
-
-                setLeague(matchResults);
-                setTableData(tableResults);
-                setLeagueData(leagueInfo);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchDataWithCancellation();
-
-        return () => {
-            // Cancel the request when the component unmounts or when activeLeague changes
-            controller.abort();
-        };
-
+    useEffect(() => {
+        if (activeLeague) {
+            getSoccerData({ variables: { league: activeLeague } });
+        }
     }, [activeLeague]);
 
-    const groupedResults = league.reduce((result, match) => {
+    const groupedResults = league?.reduce((result, match) => {
         const date = match.date.split('T')[0];
         if (!result[date]) {
             result[date] = [];
@@ -84,6 +44,10 @@ const SoccerComponent = ({
         result[date].push(match);
         return result;
     }, {});
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <>
