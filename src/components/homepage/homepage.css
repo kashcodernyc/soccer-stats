@@ -39,7 +39,7 @@ body{
   align-items: center;
   flex: 2;
   overflow: scroll;
-  padding: 10px 0 10px 0;
+  padding: 10px 0 20px 0;
 }
 
 .navigation-bar {
@@ -71,12 +71,13 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
+  margin: 15px;
   padding: 5px;
   font-size: 14px;
   color: white;
   background-color: #ee4e34;
 }
+
 
 h1, h2{
   font-size: 14px;
@@ -206,7 +207,6 @@ h1, h2{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: scroll;
   margin-top: 20px;
 }
 
@@ -263,6 +263,9 @@ td img {
   }
   .scoreboard {
     overflow: visible;
+  }
+  .league-table{
+    overflow:visible;
   }
   
 
