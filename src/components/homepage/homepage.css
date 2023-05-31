@@ -7,6 +7,27 @@
   width: 100%;
   height: 98vh;
 }
+.spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #ee4e34;
+  border-top-color: transparent;
+  animation: spin 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 
 .scoreboard {
   display: flex;
@@ -49,7 +70,7 @@
   align-items: center;
   margin-top: 15px;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   background-color: #ee4e34;
 }
@@ -59,6 +80,8 @@ h1, h2{
   margin: 0;
   padding: 0;
 }
+
+
 .logo-container {
   display: flex;
   justify-content: space-between;
@@ -71,6 +94,7 @@ h1, h2{
   height: 40px;
   width: 40px;
   object-fit: contain;
+  cursor: pointer;
 }
 
 .table-league-logo img{
@@ -181,7 +205,7 @@ table {
   border-left: 8px solid #ee4e34;
   border-right: 8px solid #ee4e34;
   width: 500px;
-  margin: 10px 0 10px 0;
+  margin: 10px 0 20px 0;
 }
 
 thead {

@@ -44,16 +44,6 @@ const SoccerTable = ({ tableData, leagueData }) => {
                             <td>{team.goalsFor}</td>
                             <td>{team.goalsAgainst}</td>
                             <td>{team.points}</td>
-                            {/* <td className="form-column">
-                                {team.form.split('').map((result, index) => (
-                                    <span
-                                        key={index}
-                                        className={`form-result-${result}`}
-                                    >
-                                        {result}
-                                    </span>
-                                ))}
-                            </td> */}
                         </tr>
                     ))}
                 </tbody>

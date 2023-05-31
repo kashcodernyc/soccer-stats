@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
 import { LeagueList } from '../../teams';
-import { GET_SOCCER_DATA } from './soccerQueries';
 
 
 const SoccerComponent = ({
@@ -11,10 +9,13 @@ const SoccerComponent = ({
     setLeague,
     leagueData,
     setTableData,
-    setLeagueData
+    setLeagueData,
+    getSoccerData,
+    loading,
+    data
 }) => {
 
-    const [getSoccerData, { loading, data }] = useLazyQuery(GET_SOCCER_DATA);
+
 
     const handleLeagueClick = (leagueId) => {
         setActiveLeague(leagueId);
@@ -45,12 +46,10 @@ const SoccerComponent = ({
         return result;
     }, {});
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <>
+            <h3 className="page-title">click one of the league icon to display fixtures and standings</h3>
             <div className="logo-container">
                 {LeagueList.map((league) => (
                     <img
