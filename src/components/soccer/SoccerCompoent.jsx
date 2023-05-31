@@ -11,7 +11,6 @@ const SoccerComponent = ({
     setTableData,
     setLeagueData,
     getSoccerData,
-    loading,
     data
 }) => {
 

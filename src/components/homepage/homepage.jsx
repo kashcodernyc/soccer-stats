@@ -38,6 +38,7 @@ const Homepage = () => {
                 <SoccerTable
                     tableData={tableData}
                     leagueData={leagueData}
+                    activeLeague={activeLeague}
                 />
             </div>
         </div>

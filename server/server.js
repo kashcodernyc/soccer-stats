@@ -34,7 +34,9 @@ const typeDefs = gql`
 
   type TeamStanding {
     rank: Int
+    id: Int
     points: Int
+    group: String
     name: String
     logo: String
     played: Int
@@ -115,20 +117,26 @@ const resolvers = {
           id: match.fixture.id,
         }));
 
-        const tableResults =
-          tableResponse.data.response[0].league.standings[0].map((row) => ({
-            rank: row.rank,
-            points: row.points,
-            name: row.team.name,
-            logo: row.team.logo,
-            played: row.all.played,
-            win: row.all.win,
-            lose: row.all.lose,
-            draw: row.all.draw,
-            goalsFor: row.all.goals.for,
-            goalsAgainst: row.all.goals.against,
-            form: row.form,
-          }));
+        const groupTable =
+          tableResponse?.data.response[0].league.standings.length > 1
+            ? tableResponse?.data.response[0].league.standings.flat()
+            : tableResponse?.data.response[0].league.standings[0];
+
+        const tableResults = groupTable.map((row) => ({
+          rank: row.rank,
+          id: row.team.id,
+          group: row.group,
+          points: row.points,
+          name: row.team.name,
+          logo: row.team.logo,
+          played: row.all.played,
+          win: row.all.win,
+          lose: row.all.lose,
+          draw: row.all.draw,
+          goalsFor: row.all.goals.for,
+          goalsAgainst: row.all.goals.against,
+          form: row.form,
+        }));
 
         const leagueInfo = {
           leagueName: tableResponse.data.response[0].league.name,

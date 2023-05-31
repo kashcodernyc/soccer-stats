@@ -16,6 +16,8 @@ export const GET_SOCCER_DATA = gql`
       }
       table {
         rank
+        id
+        group
         points
         name
         logo
