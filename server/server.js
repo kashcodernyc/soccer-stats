@@ -2,13 +2,11 @@ const express = require("express");
 require("dotenv").config();
 const { ApolloServer, gql } = require("apollo-server-express");
 const axios = require("axios");
-const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
 
 const ApiKey = process.env.API_KEY;
 const rightNow = new Date();
